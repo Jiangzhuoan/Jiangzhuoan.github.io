@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://jiangzhuoan.github.io/"/>
-  <updated>2020-04-19T08:57:24.113Z</updated>
+  <updated>2020-04-21T02:10:17.327Z</updated>
   <id>https://jiangzhuoan.github.io/</id>
   
   <author>
@@ -15,6 +15,28 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>2020.4.20</title>
+    <link href="https://jiangzhuoan.github.io/2020/04/21/2020.4.20/"/>
+    <id>https://jiangzhuoan.github.io/2020/04/21/2020.4.20/</id>
+    <published>2020-04-21T02:18:29.689Z</published>
+    <updated>2020-04-21T02:10:17.327Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="LeetCode-11-盛最多水的容器"><a href="#LeetCode-11-盛最多水的容器" class="headerlink" title="LeetCode 11 - 盛最多水的容器"></a>LeetCode 11 - 盛最多水的容器</h3><hr><h4 id="题目"><a href="#题目" class="headerlink" title="题目:"></a>题目:</h4><pre><code>1.给你 n 个非负整数 a1，a2，...，an，每个数代表坐标中的一个点 (i, ai) 。在坐标内画 n 条垂直线，垂直线 i 的两个端点分别为 (i, ai) 和 (i, 0)。2.找出其中的两条线，使得它们与 x 轴共同构成的容器可以容纳最多的水。</code></pre><h4 id="样例"><a href="#样例" class="headerlink" title="样例:"></a>样例:</h4><pre><code>输入：[1,8,6,2,5,4,8,3,7]输出：49</code></pre><h4 id="题目理解"><a href="#题目理解" class="headerlink" title="题目理解:"></a>题目理解:</h4><pre><code>1.本题是一道高频面试题，根据题意不难求出，计算接雨水面积的公式为  底边长度 * 高度 ,设 i 为左指针，j 为右指针，则可知面积计算公式为 (j - i) * min(nums[j],nums[i])2.由上可得，最朴素的思路是使用双重循环暴力求解,即遍历所有可能的组合并计算长度。时间复杂度O(N*2),空间复杂度O(1),显然这不是最优解3.为了优化算法,让我们回归问题的本质。此类寻找  某个最优区间的问题  很容易让人想到类似  sliding window  的解法。那么下一个问题就是，如何进行窗口的滑动。4.不难想到，在滑动的过程中，无论是左指针 i ++  或是 右指针 j -- 底边长度都会减1，故只有优化高度，即在每次移动中，都试图寻找使高度更大的选项，也就是移动左右两边长度较短的那一边5.由此，只需将 i 设定为 0 ，j 设定为 nums.length - 1，如果左高度 nums[ i ] &lt; nums[ j ] 则移动左指针 i ++ ；如果右高度 nums[ j ] &lt; nums[ i ] 则移动右指针  j -- ,并记录每次的面积。 仅需一次遍历，时间复杂度为O(N)</code></pre><h4 id="代码"><a href="#代码" class="headerlink" title="代码:"></a>代码:</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">maxArea</span><span class="params">(<span class="keyword">int</span>[] height)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> j = height.length - <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> res = Math.min(height[<span class="number">0</span>],height[height.length - <span class="number">1</span>]) * (j - i);</span><br><span class="line">        <span class="keyword">while</span>(i &lt; j)&#123;</span><br><span class="line">            <span class="keyword">if</span>(height[i] &lt;= height[j])</span><br><span class="line">                res = Math.max(res,(j - i) * height[i++]);</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                res = Math.max(res,(j - i) * height[j--]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h4 id="思考与拓展"><a href="#思考与拓展" class="headerlink" title="思考与拓展:"></a>思考与拓展:</h4><pre><code>滑动窗口题目最关键的步骤在于如何确定滑动的方式以及如何确定初始状态(避免漏解)，关于滑动方式，其实就是每一步如何保证局部最优解的问题，关于避免漏解或错解，请看与本题类似的LeetCode 448题的分析。</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;LeetCode-11-盛最多水的容器&quot;&gt;&lt;a href=&quot;#LeetCode-11-盛最多水的容器&quot; class=&quot;headerlink&quot; title=&quot;LeetCode 11 - 盛最多水的容器&quot;&gt;&lt;/a&gt;LeetCode 11 - 盛最多水的容器&lt;/h3&gt;&lt;
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
   
   <entry>
     <title>Hello World</title>
